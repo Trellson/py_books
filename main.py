@@ -2,7 +2,7 @@ import urllib.parse
 import requests
 
 
-api_url = https://www.googleapis.com/books/v1/voulumes?q={userinput}
+api_url = https://www.googleapis.com/books/v1/volumes?q={userinput}
 
 
 response = requests.get(url).json()
