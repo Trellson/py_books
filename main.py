@@ -1,10 +1,24 @@
 import requests
 import urllib
 
-response = requests.get("http://www.google.com")
-
 
 def main():
+
+   userSearch = 'more than a carpenter'
+   api_url = 'https://www.googleapis.com/books/v1/volumes?q='+userSearch+'&maxResults=5'
+   response = requests.get(api_url).json()
+   items = response['items']
+  
+   for i in range(2,len(response)+1):
+      title = items[i]['volumeInfo']['title']
+      author = items[i]['volumeInfo']['authors']
+     # publisher = items[i]['volumeInfo']['publisher']  For some reason the publisher would not work...
+
+   
+   print(title)
+   print(author)
+   #print(publisher)
+
    try:
       # creating book list 
       readingList = []
@@ -31,9 +45,29 @@ def main():
       choice = int(input())
      
       if choice == 1: 
-         userSearch = input ('What would you like to search?')
-         #readingList.append selected book 
+         userSearch = input ('What would you like to search?\n')
+
          print('Loading seletions... Please wait')
+         print(userSearch)
+         print()
+
+         api_url = 'https://www.googleapis.com/books/v1/volumes?q='+userSearch+'&maxResults=5'
+         response = requests.get(api_url).json()
+         items = response['items']
+         title = items[i]['volumeInfo']['title']
+        # publisher = items[i]['volumeInfo']['publisher']
+         book = [title, author]
+        
+         for i in items:
+            title = i['volumeInfo']['title']
+            author = i['volumeInfo']['authors']
+           # publisher = i['volumeInfo']['publisher']
+            book = [title, author,]
+            print(book)
+            print()
+         save_book = input('Like these books? Enter number of book to save\n If not, press n to return to menu.')
+
+        
       
       elif choice == 2:
          print('Displaying Reading List \n =====================')
