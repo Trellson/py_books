@@ -57,15 +57,27 @@ def main():
          title = items[i]['volumeInfo']['title']
         # publisher = items[i]['volumeInfo']['publisher']
          book = [title, author]
-        
+         book_list = []
          for i in items:
             title = i['volumeInfo']['title']
             author = i['volumeInfo']['authors']
            # publisher = i['volumeInfo']['publisher']
             book = [title, author,]
-            print(book)
+            book_list.append(book)
+            print (book)
             print()
-         save_book = input('Like these books? Enter number of book to save\n If not, press n to return to menu.')
+         book_select = input('Like these books? Enter number of book to save\n If not, press 5 to return to menu.')
+         print(book_list)
+         print
+         print('5) Quit')
+         choice = 0
+         while choice !=len(book_list):
+            
+            print(book_list)
+            print
+            print('5) Quit')
+            choice = int(input())
+         book_list[choice].append(readingList)
 
         
       
