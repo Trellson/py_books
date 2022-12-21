@@ -1,15 +1,18 @@
 import requests
 import urllib
 
-
-api_url = https://www.googleapis.com/books/v1/volumes?q={userinput}
-
-
-response = requests.get(url).json()
-userSearch = 
+userSearch = 'pen'
+api_url = 'https://www.googleapis.com/books/v1/volumes?q='+userSearch
 
 
-print(response.status)
+
+
+response = requests.get(api_url).json()
+
+print(response)
+
+print (api_url)
+
 
 
 def main():
