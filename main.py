@@ -72,13 +72,10 @@ def main():
          print('5) Quit')
          choice = 0
          while choice !=len(book_list):
-            
-            print(book_list)
-            print
-            print('5) Quit')
+      
             choice = int(input())
          book_list[choice].append(readingList)
-
+         return
         
       
       elif choice == 2:
