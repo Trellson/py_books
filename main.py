@@ -4,17 +4,22 @@ import urllib
 
 def main():
 
-   userSearch = 'pen'
+   userSearch = 'more than a carpenter'
    api_url = 'https://www.googleapis.com/books/v1/volumes?q='+userSearch+'&maxResults=5'
-
-
-
-
    response = requests.get(api_url).json()
+   items = response['items']
+  
+   for i in range(0,len(response)+1):
+      title = items[i]['volumeInfo']['title']
+      author = items[i]['volumeInfo']['authors']
+     # publisher = items[i]['volumeInfo']['publisher']  For some reason the publisher would not work...
+ 
+   
+   print(title)
+   print(author)
+   print(publisher)
 
-   print(response)
-
-   print (api_url)
+ #  print (api_url)
 
 
    try:
@@ -46,6 +51,7 @@ def main():
          userSearch = input ('What would you like to search?')
          #readingList.append selected book 
          print('Loading seletions... Please wait')
+         print(response)
       
       elif choice == 2:
          print('Displaying Reading List \n =====================')
