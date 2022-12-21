@@ -45,23 +45,26 @@ def main():
       choice = int(input())
      
       if choice == 1: 
-         userSearch = input ('What would you like to search?')
+         userSearch = input ('What would you like to search?\n')
 
          print('Loading seletions... Please wait')
          print(userSearch)
+         print()
 
          api_url = 'https://www.googleapis.com/books/v1/volumes?q='+userSearch+'&maxResults=5'
          response = requests.get(api_url).json()
          items = response['items']
-      
-         for i in range(5,len(response)+1):
-            title = items[i]['volumeInfo']['title']
-            author = items[i]['volumeInfo']['authors']
-            book = [title, author]
+         title = items[i]['volumeInfo']['title']
+         author = items[i]['volumeInfo']['authors']
+         book = [title, author]
         
-            return(book)
-         book = [items[i]['volumeInfo']['title'], items[i]['volumeInfo']['authors']]
-         print(book)
+         for i in items:
+            title = i['volumeInfo']['title']
+            author = i['volumeInfo']['authors']
+            book = [title, author]
+            print({i ,+') ', book)
+            print()
+         save_book = input('Like these books? Enter number of book to save\n If not, press n to return to menu.')
 
         
       
