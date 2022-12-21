@@ -1,21 +1,22 @@
 import requests
 import urllib
 
-userSearch = 'pen'
-api_url = 'https://www.googleapis.com/books/v1/volumes?q='+userSearch+'&maxResults=5'
-
-
-
-
-response = requests.get(api_url).json()
-
-print(response)
-
-print (api_url)
-
-
 
 def main():
+
+   userSearch = 'pen'
+   api_url = 'https://www.googleapis.com/books/v1/volumes?q='+userSearch+'&maxResults=5'
+
+
+
+
+   response = requests.get(api_url).json()
+
+   print(response)
+
+   print (api_url)
+
+
    try:
       # creating book list 
       readingList = []
