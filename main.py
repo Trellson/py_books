@@ -55,14 +55,15 @@ def main():
          response = requests.get(api_url).json()
          items = response['items']
          title = items[i]['volumeInfo']['title']
-         author = items[i]['volumeInfo']['authors']
+        # publisher = items[i]['volumeInfo']['publisher']
          book = [title, author]
         
          for i in items:
             title = i['volumeInfo']['title']
             author = i['volumeInfo']['authors']
-            book = [title, author]
-            print({i ,+') ', book)
+           # publisher = i['volumeInfo']['publisher']
+            book = [title, author,]
+            print(book)
             print()
          save_book = input('Like these books? Enter number of book to save\n If not, press n to return to menu.')
 
