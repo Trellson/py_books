@@ -2,7 +2,7 @@ import requests
 import urllib
 
 userSearch = 'pen'
-api_url = 'https://www.googleapis.com/books/v1/volumes?q='+userSearch
+api_url = 'https://www.googleapis.com/books/v1/volumes?q='+userSearch+'&maxResults=5'
 
 
 
