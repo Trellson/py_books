@@ -5,6 +5,20 @@ response = requests.get("http://www.google.com")
 
 
 def main():
+   try:
+      # creating book list 
+      readingList = []
+      infile = open('userBooks.txt', 'r')
+      line = infile.readline()
+      while line:
+         readingList.append(line.rstrip('\n').split(','))
+         line = infile.readline()
+      infile.close()
+
+   except FileNotFoundError :
+      print('the <userBooks.txt> file is not found!')
+      print('initializing <userBooks.txt>...')
+      readingList = []
 
 
    #menu options for user to pick
@@ -30,6 +44,11 @@ def main():
          print('Terminating program')
 
    print('Come Back Soon!')
+
+   outfile = open('userBooks.txt', 'w')
+   for book in readingList:
+      outfile.write(','.join(book) + '\n')
+   outfile.close()
 
    
 if __name__ == '__main__':
