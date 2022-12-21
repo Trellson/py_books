@@ -1,0 +1,10 @@
+
+api_url = "https://www.googleapis.com/books/v1/volumes?q=search+terms"
+
+call = api_url + urllib.parse.urlencode({"volumeInfo":userSearch})
+
+response = requests.get(call).json()
+print(response.status)
+print(response)
+
+items[i]['volumeInfo']
