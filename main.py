@@ -1,5 +1,4 @@
 import requests
-import urllib
 
 class Book:
    def __init__(self, title, author, publisher):
@@ -21,12 +20,7 @@ class Book:
         book_info = [title, author, publisher]
         book_list.append (book_info)
       return book_list
-  
-   def get_book_selection(user_selection):
-      pass
-
    
-
 def main():
    try:
       # creating book list 
@@ -44,7 +38,6 @@ def main():
       print('initializing <userBooks.txt>...')
       readingList = []
 
-
    #menu options for user to pick
    choice = 0
    while choice !=3:
@@ -56,16 +49,16 @@ def main():
      
       if choice == 1: 
          user_search = input ('What would you like to search?\n')
-
          print('Loading seletions... Please wait')
          print(user_search)
          print()
+
          book_list= Book.get_book_info(user_search)
+
          for i in range(0,len(book_list)):
             title = book_list[i][0]
             author = book_list[i][1]
             publisher = book_list[i][2]
-            
             print('title: ',title)
             print('author: ',author)
             print('publisher: ',publisher)
@@ -74,9 +67,9 @@ def main():
          while True:
             user_selection= int(input('Like these books? Enter number between 0-4 to save\n book to your Reading List. \nIf not, press 5 to return to menu.\n'))
             if user_selection >= 0 and user_selection <=4:
-               title = items[user_selection]['volumeInfo']['title']
-               author = items[user_selection]['volumeInfo']['authors'][0]
-               publisher = items[user_selection]['volumeInfo']['publisher']
+               title = book_list[user_selection][0]
+               author = book_list[user_selection][1]
+               publisher = book_list[user_selection][2]
                book_info = [title, author, publisher]
                readingList.append (book_info)
  
@@ -90,7 +83,6 @@ def main():
       elif choice == 2:
          print('Displaying Reading List \n =====================')
          for i in range(len(readingList)):
-         
             print('Title: '+ readingList[i][0])
             print('Author: '+ readingList[i][1])
             print('Publisher: '+ readingList[i][2])
