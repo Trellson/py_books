@@ -12,12 +12,7 @@ def main():
    for i in range(2,len(response)+1):
       title = items[i]['volumeInfo']['title']
       author = items[i]['volumeInfo']['authors']
-     # publisher = items[i]['volumeInfo']['publisher']  For some reason the publisher would not work...
-
-   
-   print(title)
-   print(author)
-   #print(publisher)
+      publisher = items[i]['volumeInfo']['publisher']  
 
    try:
       # creating book list 
@@ -25,7 +20,8 @@ def main():
       infile = open('userBooks.txt', 'r')
       line = infile.readline()
       while line:
-         readingList.append(line.rstrip('\n').split(','))
+         readingList.append(line.rstrip('\n').split(',')
+         )
          line = infile.readline()
       infile.close()
 
@@ -55,24 +51,43 @@ def main():
          response = requests.get(api_url).json()
          items = response['items']
          title = items[i]['volumeInfo']['title']
-        # publisher = items[i]['volumeInfo']['publisher']
-         book = [title, author]
+         publisher = items[i]['volumeInfo']['publisher']
+         book_info = [title, author]
         
          for i in items:
             title = i['volumeInfo']['title']
-            author = i['volumeInfo']['authors']
-           # publisher = i['volumeInfo']['publisher']
-            book = [title, author,]
-            print(book)
+            #only grabbing first author in array
+            author = i['volumeInfo']['authors'][0]
+            publisher = i['volumeInfo']['publisher']
+            print('title: ',title)
+            print('author: ', author)
+            print('publisher: ', publisher)
             print()
-         save_book = input('Like these books? Enter number of book to save\n If not, press n to return to menu.')
 
-        
+         while True:
+            user_selection= int(input('Like these books? Enter number of book to save\n If not, press 5 to return to menu.\n'))
+            if user_selection >= 0 and user_selection <=4:
+               title = items[user_selection]['volumeInfo']['title']
+               author = items[user_selection]['volumeInfo']['authors'][0]
+               publisher = items[user_selection]['volumeInfo']['publisher']
+               book_info = [title, author, publisher]
+               readingList.append (book_info)
+ 
+            elif user_selection == 5:
+               print('Back to menu...')
+               break
+
+            else:
+               print('Please enter number between 0 and 4 or 5 to return to menu')
       
       elif choice == 2:
          print('Displaying Reading List \n =====================')
          for i in range(len(readingList)):
-            print(readingList)
+         
+            print('Title: '+ readingList[i][0])
+            print('Author: '+ readingList[i][1])
+            print('Publisher: '+ readingList[i][2])
+            print()
 
       elif choice == 3:
          print('Terminating program')
@@ -80,8 +95,8 @@ def main():
    print('Come Back Soon!')
 
    outfile = open('userBooks.txt', 'w')
-   for book in readingList:
-      outfile.write(','.join(book) + '\n')
+   for book_info in readingList:
+      outfile.write(','.join(book_info) + '\n')
    outfile.close()
 
    
