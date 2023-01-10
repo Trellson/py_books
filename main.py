@@ -1,22 +1,33 @@
 import requests
 import urllib
 
-#def get_book_Info(userSearch, ):
+class Book:
+   def __init__(self, title, author, publisher):
+      self.title = title
+      self.author = author
+      self.publisher = publisher
+   @staticmethod
+   def get_book_info(user_search):
+      api_url = 'https://www.googleapis.com/books/v1/volumes?q='+user_search+'&maxResults=5'
+      response = requests.get(api_url).json()
+      items = response['items']
+      book_list = []
+      print(len(response))
+      for i in range(0,len(response)):
+        title = items[i]['volumeInfo']['title']
+        #only grabbing first author in array
+        author = items[i]['volumeInfo']['authors'][0]
+        publisher = items[i]['volumeInfo']['publisher'] 
+        book_info = [title, author, publisher]
+        book_list.append (book_info)
+      return book_list
+  
+   def get_book_selection(user_selection):
+      pass
 
-#def handle_file(readList):
+   
 
 def main():
-
-   userSearch = 'more than a carpenter'
-   api_url = 'https://www.googleapis.com/books/v1/volumes?q='+userSearch+'&maxResults=5'
-   response = requests.get(api_url).json()
-   items = response['items']
-  
-   for i in range(2,len(response)+1):
-      title = items[i]['volumeInfo']['title']
-      author = items[i]['volumeInfo']['authors']
-      publisher = items[i]['volumeInfo']['publisher']  
-
    try:
       # creating book list 
       readingList = []
@@ -44,27 +55,20 @@ def main():
       choice = int(input())
      
       if choice == 1: 
-         userSearch = input ('What would you like to search?\n')
+         user_search = input ('What would you like to search?\n')
 
          print('Loading seletions... Please wait')
-         print(userSearch)
+         print(user_search)
          print()
-
-         api_url = 'https://www.googleapis.com/books/v1/volumes?q='+userSearch+'&maxResults=5'
-         response = requests.get(api_url).json()
-         items = response['items']
-         title = items[i]['volumeInfo']['title']
-         publisher = items[i]['volumeInfo']['publisher']
-         book_info = [title, author]
-        
-         for i in items:
-            title = i['volumeInfo']['title']
-            #only grabbing first author in array
-            author = i['volumeInfo']['authors'][0]
-            publisher = i['volumeInfo']['publisher']
+         book_list= Book.get_book_info(user_search)
+         for i in range(0,len(book_list)):
+            title = book_list[i][0]
+            author = book_list[i][1]
+            publisher = book_list[i][2]
+            
             print('title: ',title)
-            print('author: ', author)
-            print('publisher: ', publisher)
+            print('author: ',author)
+            print('publisher: ',publisher)
             print()
 
          while True:
@@ -81,7 +85,7 @@ def main():
                break
 
             else:
-               print('Please enter number between 0 and 4 or 5 to return to menu')
+               print('Please enter number between 0 and 4\n to save a book or 5  to return to menu')
       
       elif choice == 2:
          print('Displaying Reading List \n =====================')
