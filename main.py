@@ -1,6 +1,9 @@
 import requests
 import urllib
 
+#def get_book_Info(userSearch, ):
+
+#def handle_file(readList):
 
 def main():
 
@@ -65,7 +68,7 @@ def main():
             print()
 
          while True:
-            user_selection= int(input('Like these books? Enter number of book to save\n If not, press 5 to return to menu.\n'))
+            user_selection= int(input('Like these books? Enter number between 0-4 to save\n book to your Reading List. \nIf not, press 5 to return to menu.\n'))
             if user_selection >= 0 and user_selection <=4:
                title = items[user_selection]['volumeInfo']['title']
                author = items[user_selection]['volumeInfo']['authors'][0]
