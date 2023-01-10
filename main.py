@@ -13,7 +13,7 @@ class Book:
       items = response['items']
       book_list = []
       print(len(response))
-      for i in range(0,len(response)):
+      for i in range(0,len(response['items'])):
         title = items[i]['volumeInfo']['title']
         #only grabbing first author in array
         author = items[i]['volumeInfo']['authors'][0]
