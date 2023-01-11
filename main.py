@@ -11,12 +11,11 @@ class Book:
       response = requests.get(api_url).json()
       items = response['items']
       book_list = []
-      print(len(response))
       for i in range(0,len(response['items'])):
-        title = items[i]['volumeInfo']['title']
+        title = items[i]['volumeInfo'].get('title', 'Not Listed')
         #only grabbing first author in array
-        author = items[i]['volumeInfo']['authors'][0]
-        publisher = items[i]['volumeInfo']['publisher'] 
+        author = items[i]['volumeInfo'].get('authors', ['Not Listed'])[0]
+        publisher = items[i]['volumeInfo'].get('publisher', 'Not Listed') 
         book_info = [title, author, publisher]
         book_list.append (book_info)
       return book_list
