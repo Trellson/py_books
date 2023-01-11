@@ -51,7 +51,7 @@ def main():
          print('Loading seletions... Please wait')
          print(user_search)
          print()
-
+       
          book_list= Book.get_book_info(user_search)
 
          for i in range(0,len(book_list)):
